@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% if feeds_list %}
+        {% for feed in feeds_list %}
+            <article class="media content-section">
+                {% for im in feed.media_thumbnail %}
+                    <a href="{{ feed.link }}">
+                        <img class="mr-3 image-custom-size" src="{{ im.url }}" alt="{{ feed.title }}">
+                    </a>
+                {% endfor %}
+                <div class="media-body">
+                    <div class="article-metadata d-flex justify-content-end">
+                        <small><a class="mr-2" href="{{ feed.link }}">Visit</a></small>
+                        <small class="text-muted">{{ feed.published }}</small>
+                    </div>
+                    <h2><a class="article-title" href="{{ feed.link }}">{{ feed.title }}</a></h2>
+                    <p class="article-content">{{ feed.summary }}</p>
+                </div>
+            </article>
+        {% endfor %}
+    {% else %}
+        <div class="jumbotron jumbotron-fluid">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <h1 class="display-6">Nothing To Display</h1>
+                        <p class="lead">Please, enter RSS Feed URL in textbox to read feeds.</p>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="lead d-flex justify-content-end lead">
+                            <form class="form-inline my-2 my-lg-0" method="post" action="{% url 'rss-list' %}">
+                                {% csrf_token %}
+                                <input class="form-control mr-sm-2" type="search" placeholder="Enter URL" name="url" aria-label="Search">
+                                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Read Feeds </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endblock content %}
