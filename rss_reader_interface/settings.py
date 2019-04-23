@@ -25,7 +25,10 @@ SECRET_KEY = '24ow8e^e2g^07$ai@+e#bf9qhnifhvhrw%#g1akn@)*jcb(j9i'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'rss-reader-interface.herokuapp.com',
+    '*'
+]
 
 
 # Application definition
